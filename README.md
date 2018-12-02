@@ -104,7 +104,7 @@ composer install
 ```
 7. Add demo package `neos/demo` dependency
 ```
-"neos/neos-ui": "dev-event-sourced-patch as dev-master"
+"neos/demo": "dev-event-sourced as dev-master"
 ```
 
 The resulting `composer.json` file should look something like this:
