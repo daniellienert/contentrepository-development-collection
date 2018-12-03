@@ -7,7 +7,6 @@ sudo: false
 before_install:
   - export NEOS_TARGET_VERSION=4.1
   - cd ..
-  - ls
   - git clone https://github.com/neos/neos-development-distribution.git -b ${NEOS_TARGET_VERSION}
   - cd neos-development-distribution
   - composer config repositories.contentrepository-development-collection git https://github.com/neos/contentrepository-development-collection.git
@@ -33,5 +32,12 @@ install:
   - composer update --no-progress --no-interaction
   - cd ..
   - rm -rf neos-development-distribution/Packages/CR
-  - mv contentrepository-development-collection neos-development-distribution/Packasges/CR
+  - mv contentrepository-development-collection neos-development-distribution/Packages/CR
   - cd neos-development-distribution
+before_script:
+  - cp Configuration/Settings.yaml.example Configuration/Settings.yaml
+  - Build/BuildEssentials/TravisCi/SetupDatabase.sh
+  - cp Configuration/Settings.yaml Configuration/Testing/
+script:
+  - bin/phpunit --colors --stop-on-failure -c Build/BuildEssentials/PhpUnit/FunctionalTests.xml Packages/CR/Neos.EventSourcedContentRepository/Tests/Functional
+  - bin/phpunit --colors --stop-on-failure -c Build/BuildEssentials/PhpUnit/FunctionalTests.xml Packages/CR/Neos.EventSourcedNeosAdjustments/Tests/Functional
