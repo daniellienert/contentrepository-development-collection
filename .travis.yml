@@ -7,6 +7,7 @@ sudo: false
 before_install:
   - export NEOS_TARGET_VERSION=4.1
   - cd ..
+  - ls
   - git clone https://github.com/neos/neos-development-distribution.git -b ${NEOS_TARGET_VERSION}
   - cd neos-development-distribution
   - composer config repositories.contentrepository-development-collection git https://github.com/neos/contentrepository-development-collection.git
