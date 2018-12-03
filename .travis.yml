@@ -34,6 +34,7 @@ install:
   - rm -rf neos-development-distribution/Packages/CR
   - mv contentrepository-development-collection neos-development-distribution/Packages/CR
   - cd neos-development-distribution
+  - ./flow flow:package:rescan
 before_script:
   - cp Configuration/Settings.yaml.example Configuration/Settings.yaml
   - Build/BuildEssentials/TravisCi/SetupDatabase.sh
